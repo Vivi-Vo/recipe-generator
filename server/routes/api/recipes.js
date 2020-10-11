@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
 const router = express.Router();
@@ -10,17 +10,19 @@ router.get('/:ingredients', (req, res) => {
     ingredients: req.params.ingredients
   });
   const url = `${url_base}/findByIngredients?${params}`;
-  fetch(url).then((res) => res.json()).then(data => res.json(data))
+  fetch(url)
+    .then((res) => res.json())
+      .then((data) => res.json(data))
 });
 
 router.get('/instructions/:id', (req, res) => {
   const id = req.params.id
   const params = new URLSearchParams({
     apiKey: process.env.VUE_APP_API_KEY,
-  });
+  }); 
 
   const url = `${url_base}/${id}/information?${params}`;
   fetch(url).then((res) => res.json()).then(data => res.json(data))
 });
 
-module.exports = router;
+module.exports = router; 
