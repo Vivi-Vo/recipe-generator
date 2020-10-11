@@ -24,10 +24,9 @@
             </v-card-text>
 
             <div class="btn-group">
-              <v-btn class="mx-2" fab dark outlined color="teal">
-                <v-icon dark>mdi-plus</v-icon>
+              <v-btn class="mx-2" fab dark outlined color="teal" @click="addField">
+                <v-icon dark>mdi-plus</v-icon> 
               </v-btn>
-
               <v-card-actions>
                 <v-btn
                   rounded
@@ -81,7 +80,7 @@ export default {
   },
   methods: {
     fetchRecipe: async function () {
-      const url = `recipe/ingredients/${this.ingredients.join(",")}`;
+      const url = `recipe/${this.ingredients.join(",")}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => (this.dishes = data));
@@ -96,6 +95,9 @@ export default {
         behavior: "smooth",
       });
     },
+    addField(){
+      this.ingredients.push("");
+    }
   },
 };
 </script>
