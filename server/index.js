@@ -7,7 +7,7 @@ const recipes = require('./routes/api/recipes');
 
 app.use(cors());
 
-app.use('/', serveStatic(path.join(__dirname, '/client/dist')))
+app.use('/', serveStatic(path.join(__dirname, '../client/dist')))
 app.use('/recipe', recipes);
 const port = process.env.PORT || 5000;
 
