@@ -3,8 +3,8 @@
     <v-container id="home">
       <v-row dense justify="center" alignment="center">
         <v-col cols="12">
-          <h1 id="greeting" class="mb-n3">Hi there!</h1>
-          <h2 id="headline">WHAT'S IN YOUR FRIDGE?</h2>
+            <h1 id="greeting" class=" mb-n3">Hi there!</h1>
+            <h2 id="headline">WHAT'S IN YOUR FRIDGE?</h2>
 
           <v-card id="ingredientForm" class="elevation-12">
             <v-card-text>
@@ -17,15 +17,21 @@
               >
                 <v-text-field
                   label="Ingredient"
-                  :rules="formRules"
                   v-model="ingredients[index]"
                 />
-              </v-form>
+                </v-form>
             </v-card-text>
 
             <div class="btn-group">
-              <v-btn class="mx-2" fab dark outlined color="teal" @click="addField">
-                <v-icon dark>mdi-plus</v-icon> 
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                outlined
+                color="teal"
+                @click="addField"
+              >
+                <v-icon dark>mdi-plus</v-icon>
               </v-btn>
               <v-card-actions>
                 <v-btn
@@ -42,16 +48,7 @@
         </v-col>
       </v-row>
 
-      <v-btn
-        class="mt-6"
-        small
-        absolute
-        top
-        right
-        fab
-        dark
-        v-on:click="setTheme"
-      >
+      <v-btn class="mt-6" small absolute top right fab dark v-on:click="setTheme">
         <v-icon dark>mdi-brightness-6</v-icon>
       </v-btn>
 
@@ -62,6 +59,7 @@
 
 <script>
 import recipeCard from "./components/RecipeCard.vue";
+
 export default {
   name: "app",
   components: {
@@ -73,12 +71,10 @@ export default {
       url_base: "https://api.spoonacular.com/recipes",
       ingredients: ["", "", ""],
       dishes: [],
-      formRules: [
-        //    v => !!v || 'Ingredient is required'
-      ],
     };
   },
   methods: {
+
     fetchRecipe: async function () {
       const url = `recipe/${this.ingredients.join(",")}`;
       fetch(url)
@@ -95,14 +91,16 @@ export default {
         behavior: "smooth",
       });
     },
-    addField(){
+    addField() {
       this.ingredients.push("");
-    }
+    },
   },
 };
+
+
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=League+Script&display=swap");
 
 #home {

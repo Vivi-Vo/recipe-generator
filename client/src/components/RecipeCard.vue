@@ -15,7 +15,7 @@
     </v-col>
 
     <v-dialog id="popup" v-model="dialog">
-      <v-card>
+      <v-card id="card">
         <v-card-title id="dishTitle">
           <span class="headline">{{selectedDish.title}}</span>
         </v-card-title>
@@ -29,7 +29,7 @@
         </v-card-text>
 
         <v-btn class="btn mb-4" raised color="purple lighten-4" @click="showIngredient=!showIngredient">Ingredients</v-btn>
-        <v-card-text v-if="showIngredient">
+        <v-card-text>
           <ul>
             <li v-for="item in ingredients" :key="item.index">{{item}}</li>
           </ul>
@@ -39,13 +39,13 @@
         <v-btn raised color="purple lighten-4" @click="showInstruction=!showInstruction">Direction</v-btn> 
 
 
-        <v-card-text v-if="showInstruction">
+        <v-card-text >
           <ol>
             <li v-for="steps in instructions" :key="steps.number">{{steps.step}}</li>
           </ol>
         </v-card-text>
 
-        <v-card-text v-if="showInstruction && instructionURL">
+        <v-card-text v-if="instructionURL">
           <a :href="instructionURL" target="_blank">Recipe URL</a>
           <p></p>
         </v-card-text>
@@ -118,11 +118,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 html {
   scroll-behavior: smooth;
 }
-.title {
+#card{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+/* .title {
   align-self: start;
   text-align: center;
 };
@@ -130,6 +136,6 @@ html {
   align-self: start;
   text-align: center;
   font-size: small;
-  }
+  } */
 
 </style>
