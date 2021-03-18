@@ -106,7 +106,6 @@ export default {
 #home {
   display: flex;
   flex-direction: column;
-  color: rgb(46, 44, 44);
   font-family: roboto;
   max-width: 512px;
   min-height: 100%;
