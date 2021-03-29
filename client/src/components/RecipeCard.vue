@@ -3,13 +3,8 @@
     <v-col v-for="dish in dishes" :key="dish.id" cols="6">
       <v-card>
         <div id="card" class="flex justify-space-between">
-          <v-img
-            class="align-self"
-            :src="dish.image"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            @click.stop="dialog=true;getRecipeIngredients(dish.id);selectedDish=dish"
-          />
-          <p class="title" v-text="dish.title"></p>
+          <v-img class="align-self" :src="dish.image" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" @click.stop="dialog=true;getRecipeIngredients(dish.id);selectedDish=dish"/>
+            <p class="title" v-text="dish.title"></p>
         </div>
       </v-card>
     </v-col>
@@ -121,14 +116,14 @@ export default {
 <style scoped>
 html {
   scroll-behavior: smooth;
-}
-#card{
+ }
+/*#card{
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
 }
-/* .title {
+.title {
   align-self: start;
   text-align: center;
 };
