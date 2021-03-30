@@ -13,25 +13,32 @@
         <form ref="form" class="form-group">
           <v-icon>mdi-search</v-icon>
           <v-text-field
-            label="Just start searching by ingredients separate by comma"
+            label="Ingredients"
             v-model="ingredients"
             :error-messages="ingredientErrors"
             required
             @input="$v.name.$touch()"
             @blur="$v.name.$touch()"
+            filled
+            rounded
+            dense
+            prepend-inner-icon="mdi-magnify"
           />
-          <v-btn class="mt-4" @click="fetchRecipe">SHOW RECIPES</v-btn>
-          <v-btn class="mt-4 ml-4" @click="clear">CLEAR</v-btn>
+          <v-btn outlined rounded small class="mt-1 mb-4" @click="fetchRecipe"
+            >SHOW RECIPES</v-btn
+          >
+          <v-btn outlined rounded small class="mt-1 mb-4 ml-4" @click="clear"
+            >CLEAR</v-btn
+          >
         </form>
-
-        <recipeCard v-bind:dishes="dishes"></recipeCard>
       </div>
+      <recipes v-bind:dishes="dishes"></recipes>
     </v-container>
   </v-app>
 </template>
 
 <script>
-import recipeCard from "./components/RecipeCard.vue";
+import recipes from "./components/Recipes.vue";
 import { required } from "vuelidate/lib/validators";
 
 export default {
@@ -40,7 +47,7 @@ export default {
     document.title = "Recipe Generator";
   },
   components: {
-    recipeCard,
+    recipes,
   },
   data() {
     return {
@@ -61,7 +68,8 @@ export default {
     ingredientErrors() {
       const errors = [];
       if (!this.$v.ingredients.$dirty) return errors;
-      !this.$v.ingredients.required && errors.push("Ingredient is required.");
+      !this.$v.ingredients.required &&
+        errors.push("At least one ingredient is required.");
       return errors;
     },
   },
