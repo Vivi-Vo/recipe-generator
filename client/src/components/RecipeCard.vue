@@ -1,15 +1,5 @@
 <template>
-  <v-row justify="center" alignment="center">
-    <v-col v-for="dish in dishes" :key="dish.id" cols="6">
-      <v-card>
-        <div id="card" class="flex justify-space-between">
-          <v-img class="align-self" :src="dish.image" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" @click.stop="dialog=true;getRecipeIngredients(dish.id);selectedDish=dish"/>
-            <p class="title" v-text="dish.title"></p>
-        </div>
-      </v-card>
-    </v-col>
-
-    <v-dialog id="popup" v-model="dialog">
+      <v-dialog id="popup" v-model="dialog">
       <v-card id="card">
         <v-card-title id="dishTitle">
           <span class="headline">{{selectedDish.title}}</span>
@@ -53,84 +43,4 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-  </v-row>
 </template>
-
-<script>
-export default {
-  name: "recipeCard",
-  props: {
-    dishes: Array
-  },
-  data() {
-    return {
-      dialog: false,
-      instructions: [],
-      selectedDish: {},
-      ingredients: [],
-      instructionURL: "",
-      timeCook: "",
-      recipeURL: "",
-      showIngredient: false,
-      showInstruction: false
-    };
-  },
-  methods: {
-    getRecipeIngredients: function(id) {
-      this.resetState(); 
-      const url = `recipe/instructions/${id}`;
-      fetch(url)
-        .then(res => res.json())
-        .then(result => {
-          result.extendedIngredients.forEach(element => {
-            this.ingredients.push(element.name);
-          });
-          this.timeCook = result.readyInMinutes;
-          this.recipeURL = result.image;
-          if (result.analyzedInstructions.length === 0) {
-            this.instructionURL = result.sourceUrl;
-          } else {
-            this.instructions = result.analyzedInstructions[0].steps;
-          }
-        });
-    },
-    resetState: function(){
-      this.ingredients.length = 0;
-      this.instructions.length = 0;
-      this.instructionURL = "";
-      this.timeCook = "";
-      this.showIngredient = false;
-      this.showInstruction = false
-      },
-
-    scrollToTop() {
-      document.getElementById("dishTitle").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  }
-};
-</script>
-
-<style scoped>
-html {
-  scroll-behavior: smooth;
- }
-/*#card{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-.title {
-  align-self: start;
-  text-align: center;
-};
-.dishTitle{
-  align-self: start;
-  text-align: center;
-  font-size: small;
-  } */
-
-</style>

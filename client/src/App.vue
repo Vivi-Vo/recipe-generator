@@ -1,39 +1,38 @@
 <template>
   <v-app class="app">
-    <v-container id="home">
-      <div id="header">
-        <h1 id="greeting" class="mt-10 mb-n3">Hi there!</h1>
-        <h2 id="headline" class="mb-5">WHAT'S IN YOUR FRIDGE?</h2>
-        <v-btn class="mt-9" small absolute top right fab v-on:click="setTheme">
-          <v-icon dark>mdi-brightness-6</v-icon>
-        </v-btn>
-      </div>
+    <div id="header">
+      <h1 id="greeting" class="mt-10 mb-n3">Hi there!</h1>
+      <h2 id="headline" class="mb-5">WHAT'S IN YOUR FRIDGE?</h2>
+      <v-btn class="mt-9" small absolute top right fab v-on:click="setTheme">
+        <v-icon dark>mdi-brightness-6</v-icon>
+      </v-btn>
+    </div>
 
-      <div id="body">
-        <form ref="form" class="form-group">
-          <v-icon>mdi-search</v-icon>
-          <v-text-field
-            label="Ingredients"
-            v-model="ingredients"
-            :error-messages="ingredientErrors"
-            required
-            @input="$v.name.$touch()"
-            @blur="$v.name.$touch()"
-            filled
-            rounded
-            dense
-            prepend-inner-icon="mdi-magnify"
-          />
-          <v-btn outlined rounded small class="mt-1 mb-4" @click="fetchRecipe"
-            >SHOW RECIPES</v-btn
-          >
-          <v-btn outlined rounded small class="mt-1 mb-4 ml-4" @click="clear"
-            >CLEAR</v-btn
-          >
-        </form>
-      </div>
-      <recipes v-bind:dishes="dishes"></recipes>
-    </v-container>
+    <div id="body">
+      <form ref="form" class="form-group" @submit.prevent="onSubmit">
+        <v-icon>mdi-search</v-icon>
+        <v-text-field
+          label="Ingredients"
+          v-model="ingredients"
+          v-on:keyup.enter="fetchRecipe"
+          :error-messages="ingredientErrors"
+          required
+          @input="$v.name.$touch()"
+          @blur="$v.name.$touch()"
+          filled
+          rounded
+          dense
+          prepend-inner-icon="mdi-magnify"
+        />
+        <v-btn outlined rounded small class="mt-1 mb-4" @click="fetchRecipe"
+          >SHOW RECIPES</v-btn
+        >
+        <v-btn outlined rounded small class="mt-1 mb-4 ml-4" @click="clear"
+          >CLEAR</v-btn
+        >
+      </form>
+    </div>
+    <recipes v-bind:dishes="dishes"></recipes>
   </v-app>
 </template>
 
@@ -84,6 +83,7 @@ export default {
     clear: function () {
       this.$v.$reset();
       this.ingredients = "";
+      this.dishes = "";
     },
     setTheme: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
@@ -102,5 +102,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=League+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Spinnaker&display=swap");
+
 @import "../assets/styles/main.scss";
 </style>

@@ -3,3 +3,4 @@ node_modules
 .gitignore
 package.json
 package-lock.json
+/client/dist/js
