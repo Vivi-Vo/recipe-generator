@@ -1,0 +1,24 @@
+#app{
+  margin: auto;
+  padding: 20px;
+}
+#body {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+#greeting {
+  font-family: "League Script", cursive;
+  text-align: center;
+  font-size: xx-large;
+}
+
+#headline {
+  text-align: center;
+  font-family: "Spinnaker", sans-serif;
+  font-style: normal;
+  font-stretch: ultra-condensed;
+  font-size: x-large;
+}
+
