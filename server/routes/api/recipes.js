@@ -19,8 +19,7 @@ router.get('/:ingredients', (req, res) => {
 router.get('/instructions/:id', (req, res) => {
   const id = req.params.id
   const params = new URLSearchParams({
-  //  apiKey: process.env.VUE_APP_API_KEY,
-  apiKey: "b51e4d59d50246cc93a8a0545843b45c",  
+    apiKey: process.env.VUE_APP_API_KEY,
   }); 
 
   const url = `${url_base}/${id}/information?${params}`;
