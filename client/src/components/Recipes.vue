@@ -31,10 +31,11 @@ export default {
       recipe: {
         ingredients: [],
         instructionURL: "",
-        timeCook: "",
-        recipeURL: "",
+        timeCook: 0,
+        recipeURL: "", 
         instructions: [],
         title: "",
+        serving: 0
       },
     };
   },
@@ -46,11 +47,19 @@ export default {
         .then((res) => res.json())
         .then((result) => {
           result.extendedIngredients.forEach((element) => {
-            this.recipe.ingredients.push(element.name);
+            let ingredient = {
+              amount: element.amount,
+              unit: element.unit,
+              name: element.name,
+            };
+
+            this.recipe.ingredients.push(ingredient);
           });
-          this.recipe.title=result.title;
+          this.recipe.title = result.title;
           this.recipe.timeCook = result.readyInMinutes;
           this.recipe.recipeURL = result.image;
+          this.recipe.serving = result.servings;
+
           if (result.analyzedInstructions.length === 0) {
             this.recipe.instructionURL = result.sourceUrl;
           } else {

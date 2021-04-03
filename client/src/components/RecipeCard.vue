@@ -1,32 +1,44 @@
 <template>
-  <v-card class="pa-6">
-    <h1>{{title}}</h1>
-    <img :src="recipeURL" />
-    <h2>{{ timeCook }} minutes | {{ingredients.length}} ingredients</h2>
-    <h2>Ingredients:</h2>
+  <v-card id="card" class="pa-6">
+    <div class="recipe-header">
+      <h1 id="recipe-name">{{ title }}</h1>
+      <img id="recipe-img" :src="recipeURL" />
 
-    <ul>
-      <li v-for="item in ingredients" :key="item.index">{{ item }}</li>
-    </ul>
+      <h2 id="recipe-info">
+        {{ timeCook }} minutes | {{ ingredients.length }} ingredients
+      </h2>
+    </div>
+    <div class="ingredients">
+      <h2>Ingredients</h2>
+      <h4>{{ serving }} servings</h4>
+      <ul id="ingredient-list">
+        <li v-for="item in ingredients" :key="item.index">
+          {{ `${item.amount} ${item.unit} ${item.name}` }}
+        </li>
+      </ul>
+    </div>
 
-    <h2>Step-by-step instruction:</h2>
-    <ol>
-      <li v-for="steps in instructions" :key="steps.number">
-        {{ steps.step }}
-      </li>
-    </ol>
+    <div class="direction">
+      <h2>Direction:</h2>
+      <ol>
+        <li v-for="steps in instructions" :key="steps.number">
+          {{ steps.step }}
+        </li>
+      </ol>
+    </div>
   </v-card>
 </template>
 
 <script>
 export default {
   props: {
-    timeCook: String,
+    timeCook: Number,
     ingredients: Array,
     instructionURL: String,
     recipeURL: String,
     instructions: Array,
-    title: String
+    title: String,
+    serving: Number,
   },
 };
 </script>
