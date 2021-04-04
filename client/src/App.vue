@@ -9,7 +9,7 @@
     </div>
 
     <div id="body">
-      <form ref="form" class="form-group" @submit.prevent="onSubmit">
+      <form ref="form" class="form-group" @submit.prevent="fetchRecipe">
         <v-icon>mdi-search</v-icon>
         <v-text-field
           label="Ingredients"
@@ -17,22 +17,36 @@
           v-on:keyup.enter="fetchRecipe"
           :error-messages="ingredientErrors"
           required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
+          @input="$v.ingredients.$touch()"
           filled
           rounded
           dense
           prepend-inner-icon="mdi-magnify"
         />
-        <v-btn outlined rounded small class="mt-1 mb-4" @click="fetchRecipe"
+        <v-btn
+          dark
+          small
+          rounded
+          color="blue-grey lighten-1"
+          class="mt-1 mb-4"
+          @click="fetchRecipe"
           >SHOW RECIPES</v-btn
         >
-        <v-btn outlined rounded small class="mt-1 mb-4 ml-4" @click="clear"
+        <v-btn
+          dark
+          small
+          rounded
+          color="blue-grey lighten-1"
+          class="mt-1 mb-4 ml-4"
+          @click="clear"
+          id="btn-2"
           >CLEAR</v-btn
         >
       </form>
     </div>
-    <recipes v-bind:dishes="dishes"></recipes>
+
+    <v-skeleton-loader id="loader" v-show="loading" :key="index" width="15rem" type="image, card-heading"></v-skeleton-loader>
+    <recipes v-show= "!loading" v-bind:dishes="dishes"></recipes>
   </v-app>
 </template>
 
@@ -55,6 +69,7 @@ export default {
       ingredients: "",
       dishes: [],
       submitStatus: null,
+      loading: false,
     };
   },
   validations: {
@@ -75,15 +90,20 @@ export default {
   methods: {
     fetchRecipe: async function () {
       this.$v.$touch();
+      this.loading = true;
       const url = `recipe/${this.ingredients}`;
       fetch(url)
         .then((res) => res.json())
-        .then((data) => (this.dishes = data));
+        .then((data) => {
+          this.dishes = data;
+          this.loading = false;
+        });
     },
     clear: function () {
       this.$v.$reset();
       this.ingredients = "";
-      this.dishes = "";
+      this.dishes = [];
+      this.loading = false;
     },
     setTheme: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

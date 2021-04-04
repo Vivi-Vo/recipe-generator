@@ -1,17 +1,28 @@
 <template>
   <div id="recipes">
     <div class="card" v-for="dish in dishes" :key="dish.id">
-      <v-dialog v-model="showDialog" max-width="800" overlay-opacity="0.2">
+      <v-dialog
+        v-model="showDialog"
+        max-width="800"
+        overlay-opacity="0.2"
+        :retain-focus="false"
+      >
         <template v-slot:activator="{ on, attrs }">
           <img
             :src="dish.image"
-            @click="getRecipeIngredients(dish.id)"
             v-bind="attrs"
             v-on="on"
+            @click="getRecipeIngredients(dish.id)"
           />
-          <p id="title" v-text="dish.title"></p>
+          <p
+            id="title"
+            v-text="dish.title"
+            v-bind="attrs"
+            v-on="on"
+            @click="getRecipeIngredients(dish.id)"
+          ></p>
         </template>
-        <RecipeCard v-bind="recipe"></RecipeCard>
+        <RecipeCard v-bind="recipe" v-bind:dataIsFetched="dataIsFetched"></RecipeCard>
       </v-dialog>
     </div>
   </div>
@@ -32,11 +43,13 @@ export default {
         ingredients: [],
         instructionURL: "",
         timeCook: 0,
-        recipeURL: "", 
+        recipeURL: "",
         instructions: [],
         title: "",
-        serving: 0
+        serving: 0,
+        credit: "",
       },
+      dataIsFetched: false
     };
   },
   methods: {
@@ -59,21 +72,27 @@ export default {
           this.recipe.timeCook = result.readyInMinutes;
           this.recipe.recipeURL = result.image;
           this.recipe.serving = result.servings;
+          this.recipe.credit = result.creditsText;
 
           if (result.analyzedInstructions.length === 0) {
             this.recipe.instructionURL = result.sourceUrl;
           } else {
             this.recipe.instructions = result.analyzedInstructions[0].steps;
           }
+          this.dataIsFetched = true
         });
     },
     resetState: function () {
+      this.dataIsFetched = false;
       this.recipe = {
-        title: "",
         ingredients: [],
         instructionURL: "",
-        timeCook: "",
+        timeCook: 0,
         recipeURL: "",
+        instructions: [],
+        title: "",
+        serving: 0,
+        credit: "",
       };
     },
   },
