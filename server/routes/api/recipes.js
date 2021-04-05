@@ -9,6 +9,7 @@ router.get('/:ingredients', (req, res) => {
     apiKey: process.env.VUE_APP_API_KEY,
     ingredients: req.params.ingredients
   });
+  console.log(params.apiKey)
   const url = `${url_base}/findByIngredients?${params}`;
   fetch(url)
     .then((res) => res.json())
