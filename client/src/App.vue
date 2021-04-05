@@ -45,7 +45,7 @@
       </form>
     </div>
 
-    <v-skeleton-loader id="loader" v-show="loading" :key="index" width="15rem" type="image, card-heading"></v-skeleton-loader>
+    <v-skeleton-loader id="loader" v-show="loading" width="15rem" type="image, card-heading"></v-skeleton-loader>
     <recipes v-show= "!loading" v-bind:dishes="dishes"></recipes>
   </v-app>
 </template>
@@ -64,8 +64,6 @@ export default {
   },
   data() {
     return {
-      api_key: process.env.VUE_APP_API_KEY,
-      url_base: "https://api.spoonacular.com/recipes",
       ingredients: "",
       dishes: [],
       submitStatus: null,
