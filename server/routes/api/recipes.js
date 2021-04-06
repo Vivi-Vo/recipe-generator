@@ -5,7 +5,7 @@ const router = express.Router();
 const url_base = 'https://api.spoonacular.com/recipes';
 
 router.get('/:ingredients', (req, res) => {
-  const params = new URLSearchParams({
+    const params = new URLSearchParams({
     apiKey: process.env.VUE_APP_API_KEY,
     ingredients: req.params.ingredients
   });
