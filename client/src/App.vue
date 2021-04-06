@@ -3,7 +3,7 @@
     <div id="header">
       <h1 id="greeting" class="mt-10 mb-n3">Hi there!</h1>
       <h2 id="headline" class="mb-5">WHAT'S IN YOUR FRIDGE?</h2>
-      <v-btn class="mt-9" small absolute top right fab v-on:click="setTheme">
+      <v-btn class="mt-2 mr-n6" small absolute top right fab v-on:click="setTheme">
         <v-icon dark>mdi-brightness-6</v-icon>
       </v-btn>
     </div>
