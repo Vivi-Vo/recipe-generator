@@ -105,15 +105,8 @@ export default {
     },
     setTheme: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-    },
-    scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
-  },
+    }
+      },
 };
 </script>
 
