@@ -1,0 +1,40 @@
+#recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-rows: auto;
+  column-gap: 20px;
+  font-family: 'europa', sans-serif;
+
+}
+
+
+h1,
+h2,
+h4 {
+  font-weight: bolder;
+}
+
+li {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+img {
+  border-radius: 8px;
+  width: 15rem;
+}
+
+#title:hover {
+  color: #607D8B;
+  font-weight: bold;
+
+}
+
+#ingredient-list {
+  list-style-type: none;
+}
