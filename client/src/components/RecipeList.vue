@@ -22,7 +22,10 @@
             @click="getRecipeIngredients(dish.id)"
           ></p>
         </template>
-        <RecipeCard v-bind="recipe" v-bind:dataIsFetched="dataIsFetched"></RecipeCard>
+        <RecipeCard
+          v-bind="recipe"
+          v-bind:dataIsFetched="dataIsFetched"
+        ></RecipeCard>
       </v-dialog>
     </div>
   </div>
@@ -32,7 +35,7 @@
 import RecipeCard from "./RecipeCard.vue";
 export default {
   components: { RecipeCard },
-  name: "recipes",
+  name: "RecipeList",
   props: {
     dishes: Array,
   },
@@ -49,7 +52,7 @@ export default {
         serving: 0,
         credit: "",
       },
-      dataIsFetched: false
+      dataIsFetched: false,
     };
   },
   methods: {
@@ -79,7 +82,7 @@ export default {
           } else {
             this.recipe.instructions = result.analyzedInstructions[0].steps;
           }
-          this.dataIsFetched = true
+          this.dataIsFetched = true;
         });
     },
     resetState: function () {
