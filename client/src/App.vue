@@ -1,7 +1,7 @@
 <template>
   <v-app class="app">
     <AppHeader :greeting="greeting" :headline="headline" />
-    <v-btn class="mt-9 mr-6" small absolute top right fab v-on:click="setTheme">
+    <v-btn class="mt-1 mr-0" small absolute top right fab v-on:click="setTheme">
       <v-icon dark>mdi-brightness-6</v-icon>
     </v-btn>
     <SearchForm />
@@ -37,8 +37,8 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=League+Script&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Spinnaker&display=swap");
-
-@import "../assets/styles/main.scss";
+#app {
+  margin: auto;
+  padding: 20px;
+}
 </style>

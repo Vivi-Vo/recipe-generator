@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1 id="greeting" class="mt-10 mb-n3">{{greeting}}</h1>
-    <h2 id="headline" class="mb-5">{{headline}}</h2>
+    <h2 id="headline" class="mb-5">{{headline.toUpperCase()}}</h2>
   </header>
 </template>
 

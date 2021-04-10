@@ -1,9 +1,15 @@
 <template>
   <div>
-    <form id="search-form" ref="form" class="form-group" @submit.prevent="fetchRecipe">
+    <form
+      id="search-form"
+      ref="form"
+      class="form-group"
+      @submit.prevent="fetchRecipe"
+    >
       <v-icon>mdi-search</v-icon>
       <v-text-field
         label="Ingredients"
+        placeholder="Egg,chicken, rice"
         v-model="ingredients"
         v-on:keyup.enter="fetchRecipe"
         :error-messages="ingredientErrors"
@@ -14,26 +20,29 @@
         dense
         prepend-inner-icon="mdi-magnify"
       />
-      <v-btn
-        dark
-        small
-        rounded
-        color="blue-grey lighten-1"
-        class="mt-1 mb-4"
-        id="btn-2"
-        @click="fetchRecipe"
-        >SHOW RECIPES</v-btn
-      >
-      <v-btn
-        dark
-        small
-        rounded
-        color="blue-grey lighten-1"
-        class="mt-1 mb-4 ml-4"
-        @click="clear"
-        id="btn-2"
-        >CLEAR</v-btn
-      >
+      <div class="btn-group">
+        <v-btn
+          dark
+          small
+          rounded
+          color="blue-grey lighten-1"
+          class="mt-1 mb-4"
+          id="btn-2"
+          @click="fetchRecipe"
+          >SHOW RECIPES</v-btn
+        >
+        <v-btn
+          dark
+          small
+          rounded
+          color="blue-grey lighten-1"
+          class="mt-1 mb-4 ml-4"
+          @click="clear"
+          id="btn-2"
+          >CLEAR</v-btn
+        >
+      </div>
+
       <v-skeleton-loader
         id="loader"
         v-show="loading"
@@ -51,8 +60,8 @@ import RecipeList from "./RecipeList";
 
 export default {
   name: "SearchForm",
-  components:{
-    RecipeList
+  components: {
+    RecipeList,
   },
   data() {
     return {
@@ -79,14 +88,18 @@ export default {
   methods: {
     fetchRecipe: async function () {
       this.$v.$touch();
-      this.loading = true;
-      const url = `recipe/${this.ingredients}`;
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          this.dishes = data;
-          this.loading = false;
-        });
+      if (this.$v.$invalid) {
+        return;
+      } else {
+        this.loading = true;
+        const url = `recipe/${this.ingredients}`;
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            this.dishes = data;
+            this.loading = false;
+          });
+      }
     },
     clear: function () {
       this.$v.$reset();
@@ -105,6 +118,9 @@ export default {
   grid-template-rows: auto;
 }
 
+.btn-group {
+  justify-self: center;
+}
 #btn-1:hover {
   color: black;
 }

@@ -54,13 +54,13 @@ export default {
     title: String,
     serving: Number,
     credit: String,
-    dataIsFetched: Boolean
+    dataIsFetched: Boolean,
   },
 };
 </script>
 
 
 <style scoped>
-@import "../../assets/styles/recipes.scss";
+@import "../../assets/styles/recipes.css";
 @import url("https://use.typekit.net/bdn8fqt.css");
 </style>
