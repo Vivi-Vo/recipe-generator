@@ -27,7 +27,7 @@
           rounded
           color="blue-grey lighten-1"
           class="mt-1 mb-4"
-          id="btn-2"
+          id="searchBtn"
           @click="fetchRecipe"
           >SHOW RECIPES</v-btn
         >
@@ -38,7 +38,7 @@
           color="blue-grey lighten-1"
           class="mt-1 mb-4 ml-4"
           @click="clear"
-          id="btn-2"
+          id="clearBtn"
           >CLEAR</v-btn
         >
       </div>
@@ -121,11 +121,11 @@ export default {
 .btn-group {
   justify-self: center;
 }
-#btn-1:hover {
+#searchBtn:hover {
   color: black;
 }
 
-#btn-2:hover {
+#clearBtn:hover {
   color: black;
 }
 </style>
