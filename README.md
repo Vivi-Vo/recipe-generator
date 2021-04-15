@@ -5,5 +5,8 @@ https://user-images.githubusercontent.com/13422909/114891253-ba0fe500-9dd9-11eb-
 
 
 ## Live Demo
+
+The app is live at the below url. Feel free to play with it! 
+
 https://the-recipe-generator.herokuapp.com/
 ***
